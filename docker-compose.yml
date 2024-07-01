@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  postgresql:
+    image: postgres
+    container_name: db-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST=localhost
+      - POSTGRES_USER=user3
+      - POSTGRES_PASSWORD=user3
+      - POSTGRES_DATABASE=lesson_nestjs
+    command: postgres
+    restart: always
+
+
+  redis:
+    image: redis:alpine3.20
+    container_name: db-redis
+    ports:
+      - "6379:6379"
