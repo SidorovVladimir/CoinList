@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { User } from './models/user.model';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDTO } from './dto';
-import { AppError } from 'src/common/errors';
+import { AppError } from 'src/common/constants/errors';
 // import { users } from 'src/moks/index';
 
 @Injectable()
@@ -15,6 +15,10 @@ export class UsersService {
 
   async hashPassword(password) {
     return bcrypt.hash(password, 10);
+  }
+
+  async findUserByEmail(email: string) {
+    return this.userRepository.findOne({ where: { email }});
   }
 
 
