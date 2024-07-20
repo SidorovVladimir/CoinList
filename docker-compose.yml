@@ -7,10 +7,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_HOST=localhost
-      - POSTGRES_USER=user3
-      - POSTGRES_PASSWORD=user3
-      - POSTGRES_DATABASE=lesson_nestjs
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     command: postgres
     restart: always
 

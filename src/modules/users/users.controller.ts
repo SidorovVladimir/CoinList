@@ -10,7 +10,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   
-  @ApiTags('Api')
+  @ApiTags('API')
   @ApiResponse({ status: 200, type: UpdateUserDTO})
   @UseGuards(JwtAuthGuard)
   @Patch()
@@ -21,7 +21,7 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Delete()
-  deleteUser(@Req() request) {
+  deleteUser(@Req() request): Promise<boolean> {
     const user = request.user;
     return this.usersService.deleteUser(user.email)
   }
