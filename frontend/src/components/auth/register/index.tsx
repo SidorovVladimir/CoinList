@@ -1,7 +1,18 @@
 import { Button, TextField, Typography } from '@mui/material';
 import React from 'react';
+import { IPropsRegister } from '../../../common/types/auth';
 
-const RegisterPage = () => {
+const RegisterPage: React.FC<IPropsRegister> = (
+	props: IPropsRegister
+): JSX.Element => {
+	const {
+		setEmail,
+		setFirstName,
+		setPassword,
+		setRepeatPassword,
+		setUsername,
+		navigate,
+	} = props;
 	return (
 		<>
 			<Typography variant='h2' fontFamily='Popins' textAlign='center'>
@@ -10,7 +21,7 @@ const RegisterPage = () => {
 			<Typography
 				marginBottom={2}
 				variant='body1'
-				fontFamily='Popins'
+				fontFamily='Poppins'
 				textAlign='center'
 			>
 				Введите данные для регистрации
@@ -21,6 +32,7 @@ const RegisterPage = () => {
 				label='Имя'
 				variant='outlined'
 				placeholder='Введите ваше имя'
+				onChange={(e) => setFirstName(e.target.value)}
 			/>
 			<TextField
 				fullWidth={true}
@@ -28,6 +40,7 @@ const RegisterPage = () => {
 				label='Username'
 				variant='outlined'
 				placeholder='Введите ваш username'
+				onChange={(e) => setUsername(e.target.value)}
 			/>
 			<TextField
 				fullWidth={true}
@@ -35,6 +48,7 @@ const RegisterPage = () => {
 				label='Email'
 				variant='outlined'
 				placeholder='Введите ваш email'
+				onChange={(e) => setEmail(e.target.value)}
 			/>
 			<TextField
 				fullWidth={true}
@@ -43,6 +57,7 @@ const RegisterPage = () => {
 				label='Password'
 				variant='outlined'
 				placeholder='Введите ваш пароль'
+				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<TextField
 				fullWidth={true}
@@ -51,11 +66,13 @@ const RegisterPage = () => {
 				label='Password'
 				variant='outlined'
 				placeholder='Повторите ваш пароль'
+				onChange={(e) => setRepeatPassword(e.target.value)}
 			/>
 			<Button
+				type='submit'
 				variant='contained'
 				sx={{
-					fontFamily: 'Popins',
+					fontFamily: 'Poppins',
 					marginTop: 2,
 					width: '60%',
 					marginBottom: 2,
@@ -63,9 +80,11 @@ const RegisterPage = () => {
 			>
 				Регистрация
 			</Button>
-			<Typography variant='body1' sx={{ fontFamily: 'Popins' }}>
+			<Typography variant='body1' sx={{ fontFamily: 'Poppins' }}>
 				У вас есть аккаунт?
-				<span className='incitingText'>Авторизация</span>
+				<span className='incitingText' onClick={() => navigate('/login')}>
+					Авторизация
+				</span>
 			</Typography>
 		</>
 	);
