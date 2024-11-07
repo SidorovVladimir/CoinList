@@ -2,9 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slice/auth/index';
 
 const store = configureStore({
-	reducer: {
-		auth: authReducer,
-	},
+  reducer: {
+    auth: authReducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
