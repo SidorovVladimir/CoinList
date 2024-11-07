@@ -1,77 +1,112 @@
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import {
-	Box,
-	Drawer,
-	Divider,
-	IconButton,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemIcon,
-	ListItemText,
-	Typography,
-	useTheme,
+  Box,
+  Drawer,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useTheme,
 } from '@mui/material';
 import {
-	HomeOutlined,
-	ChevronLeftOutlined,
-	ChevronRightOutlined,
-	AutoGraphOutlined,
-	MenuBookOutlined,
-	SettingsOutlined,
-	LogoutOutlined,
+  ChevronLeftOutlined,
+  ChevronRightOutlined,
+  LogoutOutlined,
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FlexBetween from '../flex-between';
+import { navMenu } from '../../common/moks/navigate';
+import { tokens } from '../../theme';
+import Logo from '../../assets/images/sidebar/logo.svg';
 
 const SidebarComponent = (props: any) => {
-	const { isNonMobile, drawerWidth, isOpen, setIsOpen } = props;
-	const { pathname } = useLocation();
-	const [active, setActive] = useState('');
-	const classes = useStyles();
-	const navigate = useNavigate();
-	const theme = useTheme();
+  const { isNonMobile, drawerWidth, isOpen, setIsOpen } = props;
+  const { pathname } = useLocation();
+  const [active, setActive] = useState('');
+  const classes = useStyles();
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
-	useEffect(() => {
-		setActive(pathname.substring(1));
-	}, [pathname]);
-	return (
-		<Box component='nav'>
-			{isOpen && (
-				<Drawer
-					open={isOpen}
-					onClose={() => setIsOpen(false)}
-					variant='persistent'
-					anchor='left'
-					sx={{
-						width: drawerWidth,
-						'& .MuiDrawer-paper': {
-							color: theme.palette.secondary.main,
-							backgroundColor: theme.palette.primary.main,
-							boxSizing: 'border-box',
-							width: drawerWidth,
-						},
-					}}
-				>
-					<Box width='100%'>
-						<Box>
-							<FlexBetween>
-								<Box display='flex' alignItems='center' gap='10px'>
-									<Typography>Demo</Typography>
-								</Box>
-								{!isNonMobile && (
-									<IconButton onClick={() => setIsOpen(!isOpen)}>
-										<ChevronLeftOutlined />
-									</IconButton>
-								)}
-							</FlexBetween>
-						</Box>
-					</Box>
-				</Drawer>
-			)}
-		</Box>
-	);
+  useEffect(() => {
+    setActive(pathname.substring(1));
+  }, [pathname]);
+
+  const renderNavMenu = navMenu.map((element): JSX.Element => {
+    return (
+      <ListItem key={element.id}>
+        <ListItemButton
+          className={classes.navItem}
+          onClick={() => navigate(`${element.path}`)}
+        >
+          <ListItemIcon>{element.icon}</ListItemIcon>
+          <ListItemText>
+            <Typography variant={'body1'}>{element.name}</Typography>
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
+    );
+  });
+
+  return (
+    <Box component='nav'>
+      {isOpen && (
+        <Drawer
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          variant='persistent'
+          anchor='left'
+          sx={{
+            width: drawerWidth,
+            '& .MuiDrawer-paper': {
+              color: theme.palette.secondary.main,
+              backgroundColor: theme.palette.primary.main,
+              boxSizing: 'border-box',
+              width: drawerWidth,
+            },
+          }}
+        >
+          <Box className={classes.navBlock}>
+            <Box>
+              <FlexBetween>
+                <Box className={classes.brand}>
+                  <img src={Logo} alt='Logo_image' />
+                  <Typography variant='h1' className={classes.brandTitle}>
+                    Demo
+                  </Typography>
+                </Box>
+                {!isNonMobile && (
+                  <IconButton onClick={() => setIsOpen(!isOpen)}>
+                    <ChevronLeftOutlined />
+                  </IconButton>
+                )}
+              </FlexBetween>
+            </Box>
+            <List className={classes.navList}>{renderNavMenu}</List>
+          </Box>
+          <Box width='100%'>
+            <List>
+              <ListItem>
+                <ListItemButton className={classes.navItem}>
+                  <ListItemIcon>
+                    <LogoutOutlined />
+                  </ListItemIcon>
+                  <ListItemText>
+                    <Typography>Logout</Typography>
+                  </ListItemText>
+                </ListItemButton>
+              </ListItem>
+            </List>
+          </Box>
+        </Drawer>
+      )}
+    </Box>
+  );
 };
 
 export default SidebarComponent;
