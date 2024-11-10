@@ -6,13 +6,12 @@ export interface IPropsLogin<TFieldValues extends FieldValues = FieldValues> {
   errors: FieldErrors<TFieldValues>;
 }
 
-export interface IPropsRegister {
-  setPassword: (value: string) => void;
-  setEmail: (value: string) => void;
-  setFirstName: (value: string) => void;
-  setUsername: (value: string) => void;
-  setRepeatPassword: (value: string) => void;
+export interface IPropsRegister<
+  TFieldValues extends FieldValues = FieldValues
+> {
   navigate: (to: string) => void;
+  register: UseFormRegister<TFieldValues>;
+  errors: FieldErrors<TFieldValues>;
 }
 
 export interface IAuthState {
