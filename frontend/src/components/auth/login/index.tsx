@@ -1,12 +1,20 @@
 import React, { Fragment } from 'react';
-import { Button, TextField, Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import { IPropsLogin } from '../../../common/types/auth';
+import { useStyles } from './styles';
+import AppButton from '../../app-button';
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
   const { navigate, register, errors } = props;
+  const classes = useStyles();
   return (
     <>
-      <Typography variant='h2' fontFamily='Popins' textAlign='center'>
+      <Typography
+        variant='h2'
+        fontFamily='Popins'
+        textAlign='center'
+        fontSize={32}
+      >
         Авторизация
       </Typography>
       <Typography
@@ -38,21 +46,22 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         helperText={errors.password ? `${errors.password.message}` : ''}
         {...register('password')}
       />
-      <Button
+      <AppButton
         type='submit'
         variant='contained'
         sx={{
-          fontFamily: 'Poppins',
           marginTop: 2,
-          width: '60%',
           marginBottom: 2,
         }}
       >
         Войти
-      </Button>
+      </AppButton>
       <Typography variant='body1' sx={{ fontFamily: 'Poppins' }}>
         У вас нет аккаунта?
-        <span className='incitingText' onClick={() => navigate('/register')}>
+        <span
+          className={classes.incitingText}
+          onClick={() => navigate('/register')}
+        >
           Регистрация
         </span>
       </Typography>

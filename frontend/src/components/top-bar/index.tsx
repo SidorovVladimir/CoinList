@@ -8,7 +8,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { useAppSelector } from '../../utils/hook';
 import {
   DarkMode,
@@ -20,8 +20,11 @@ import {
 import { ColorModeContext } from '../../theme';
 import { useStyles } from './styles';
 import FlexBetween from '../flex-between';
+import { ITopbarProps } from '../../common/types/topbar';
 
-const TopBarComponent = (props: any) => {
+const TopBarComponent: FC<ITopbarProps> = (
+  props: ITopbarProps
+): JSX.Element => {
   const { user } = useAppSelector((state) => state.auth.user);
   const theme = useTheme();
   const colorMode: any = useContext(ColorModeContext);
