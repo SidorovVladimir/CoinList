@@ -2,12 +2,12 @@ import { TextField, Typography } from '@mui/material';
 import React from 'react';
 import { IPropsRegister } from '../../../common/types/auth';
 import { useStyles } from './styles';
-import AppButton from '../../app-button';
+import AppLoadingButton from '../../loading-button';
 
 const RegisterPage: React.FC<IPropsRegister> = (
   props: IPropsRegister
 ): JSX.Element => {
-  const { navigate, register, errors } = props;
+  const { navigate, register, errors, loading } = props;
   const classes = useStyles();
   return (
     <>
@@ -23,14 +23,14 @@ const RegisterPage: React.FC<IPropsRegister> = (
         Введите данные для регистрации
       </Typography>
       <TextField
-        error={!!errors.name}
+        error={!!errors.firstName}
         fullWidth={true}
         margin='normal'
         label='Имя'
         variant='outlined'
         placeholder='Введите ваше имя'
-        helperText={errors.name ? `${errors.name.message}` : ''}
-        {...register('name')}
+        helperText={errors.firstName ? `${errors.firstName.message}` : ''}
+        {...register('firstName')}
       />
       <TextField
         error={!!errors.username}
@@ -76,7 +76,8 @@ const RegisterPage: React.FC<IPropsRegister> = (
         }
         {...register('confirmPassword')}
       />
-      <AppButton
+      <AppLoadingButton
+        loading={loading}
         type='submit'
         variant='contained'
         sx={{
@@ -85,7 +86,7 @@ const RegisterPage: React.FC<IPropsRegister> = (
         }}
       >
         Регистрация
-      </AppButton>
+      </AppLoadingButton>
       <Typography variant='body1' sx={{ fontFamily: 'Poppins' }}>
         У вас есть аккаунт?
         <span

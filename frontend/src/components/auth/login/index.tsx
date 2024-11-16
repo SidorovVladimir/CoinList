@@ -2,10 +2,11 @@ import React, { Fragment } from 'react';
 import { TextField, Typography } from '@mui/material';
 import { IPropsLogin } from '../../../common/types/auth';
 import { useStyles } from './styles';
-import AppButton from '../../app-button';
+// import AppButton from '../../app-button';
+import AppLoadingButton from '../../loading-button';
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
-  const { navigate, register, errors } = props;
+  const { navigate, register, errors, loading } = props;
   const classes = useStyles();
   return (
     <>
@@ -46,7 +47,8 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         helperText={errors.password ? `${errors.password.message}` : ''}
         {...register('password')}
       />
-      <AppButton
+      <AppLoadingButton
+        loading={loading}
         type='submit'
         variant='contained'
         sx={{
@@ -55,7 +57,7 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
         }}
       >
         Войти
-      </AppButton>
+      </AppLoadingButton>
       <Typography variant='body1' sx={{ fontFamily: 'Poppins' }}>
         У вас нет аккаунта?
         <span

@@ -4,6 +4,7 @@ export interface IPropsLogin<TFieldValues extends FieldValues = FieldValues> {
   navigate: (to: string) => void;
   register: UseFormRegister<TFieldValues>;
   errors: FieldErrors<TFieldValues>;
+  loading: boolean;
 }
 
 export interface IPropsRegister<
@@ -12,11 +13,13 @@ export interface IPropsRegister<
   navigate: (to: string) => void;
   register: UseFormRegister<TFieldValues>;
   errors: FieldErrors<TFieldValues>;
+  loading: boolean;
 }
 
 export interface IAuthState {
   user: IPublicUser;
   isLogged: boolean;
+  isLoading: boolean;
 }
 
 interface IPublicUser {
@@ -36,4 +39,16 @@ interface IWatchlist {
   createdAt: string;
   updatedAt: string;
   user: number | null;
+}
+
+export interface ILoginData {
+  email: string;
+  password: string;
+}
+
+export interface IRegisterData {
+  email: string;
+  password: string;
+  firstName: string;
+  username: string;
 }

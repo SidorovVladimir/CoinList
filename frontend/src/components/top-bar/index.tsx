@@ -9,7 +9,7 @@ import {
   useTheme,
 } from '@mui/material';
 import React, { FC, useContext } from 'react';
-import { useAppSelector } from '../../utils/hook';
+// import { useAppSelector } from '../../utils/hook';
 import {
   DarkMode,
   LightMode,
@@ -25,7 +25,7 @@ import { ITopbarProps } from '../../common/types/topbar';
 const TopBarComponent: FC<ITopbarProps> = (
   props: ITopbarProps
 ): JSX.Element => {
-  const { user } = useAppSelector((state) => state.auth.user);
+  // const { user } = useAppSelector((state) => state.auth.user);
   const theme = useTheme();
   const colorMode: any = useContext(ColorModeContext);
   const classes = useStyles();
@@ -38,7 +38,11 @@ const TopBarComponent: FC<ITopbarProps> = (
             className={classes.menuIcon}
             onClick={() => setIsOpen(!isOpen)}
           />
-          <Typography variant='h3'>Welcome {user?.firstName}</Typography>
+          {/* <Typography variant='h3'>Welcome {user?.firstName}</Typography> */}
+          {/*TODO: fix */}
+          <Typography variant='h3'>
+            Welcome {sessionStorage.getItem('name')}
+          </Typography>
         </FlexBetween>
         <Box display='flex'>
           <Grid2
