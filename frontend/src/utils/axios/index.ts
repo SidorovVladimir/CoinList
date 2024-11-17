@@ -18,3 +18,12 @@ export const instance = axios.create({
 // );
 
 // export default api;
+export const coinGeckoApi = axios.create({
+  baseURL: 'https://api.coingecko.com/api/v3',
+  timeout: 5000,
+  headers: {
+    accept: 'application/json',
+    'x-cg-demo-api-key': 'CG-XCGSjf19wD7cZQyZMoyCYHCu',
+    'X-Custom-Header': 'foobar',
+  },
+});
