@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../utils/hook';
 import { Box, Grid2 } from '@mui/material';
 import { useStyles } from './styles';
 import AreaChart from '../../components/charts/area-chart';
+import TrendUp from '../../assets/images/chart/trend-up.svg';
+import TrendDown from '../../assets/images/chart/trend-down.svg';
 
 const Home: FC = (): JSX.Element => {
   const classes = useStyles();
@@ -33,24 +35,33 @@ const Home: FC = (): JSX.Element => {
   }, [favoriteAssetName, fetchData]);
 
   const renderFavoriteBlock = filteredArray.map((element: any) => {
-    const currentPrice = element.data.prices.at(-1);
-    const currentCap = element.data.market_caps.at(-1);
+    const currentPrice = element.singleAsset[0].current_price;
+    const changePrice = element.singleAsset[0].price_change_percentage_24h;
     return (
       <Grid2 key={element.name} size={{ lg: 6, sm: 6, xs: 12 }}>
         <Grid2 container className={classes.topCardItem}>
           <Grid2 size={{ lg: 6, sm: 6, xs: 12 }}>
             <h3 className={classes.assetName}>{element.name}</h3>
             <div className={classes.itemDetails}>
-              <h3 className={classes.cardPrice}>
-                ${currentPrice[1].toFixed(2)}
-              </h3>
-              <p className={classes.cardCapitalize}>
-                ${currentCap[1].toFixed(0)}
-              </p>
+              <h3 className={classes.cardPrice}>${currentPrice}</h3>
+              <Box
+                className={
+                  changePrice > 0
+                    ? `${classes.priceTrend} ${classes.trendUp}`
+                    : `${classes.priceTrend} ${classes.trendDown}`
+                }
+              >
+                {changePrice > 0 ? (
+                  <img src={TrendUp} alt='TrendUp' />
+                ) : (
+                  <img src={TrendDown} alt='TrendDown' />
+                )}
+                <span>{changePrice.toFixed(2)}%</span>
+              </Box>
             </div>
           </Grid2>
           <Grid2 size={{ lg: 6, sm: 6, xs: 12 }}>
-            <AreaChart data={element.data.prices} />
+            <AreaChart data={element.data} />
           </Grid2>
         </Grid2>
       </Grid2>
