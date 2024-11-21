@@ -36,7 +36,7 @@ const Home: FC = (): JSX.Element => {
     fetchData(favoriteAssetName);
   }, [favoriteAssetName, fetchData]);
 
-  const renderFavoriteBlock = filteredArray.map((element: any) => {
+  const renderFavoriteBlock = filteredArray.map((element: IChartData) => {
     const currentPrice = element.singleAsset[0].current_price;
     const changePrice = element.singleAsset[0].price_change_percentage_24h;
     return (
