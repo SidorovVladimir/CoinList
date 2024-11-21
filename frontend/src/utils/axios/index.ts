@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const instance = axios.create({
   baseURL: 'http://localhost:5000',
-  timeout: 1000,
+  timeout: 3000,
   headers: { 'X-Custom-Header': 'foobar' },
 });
 
@@ -20,7 +20,7 @@ export const instance = axios.create({
 // export default api;
 export const coinGeckoApi = axios.create({
   baseURL: 'https://api.coingecko.com/api/v3',
-  timeout: 5000,
+  timeout: 3000,
   headers: {
     accept: 'application/json',
     'x-cg-demo-api-key': 'CG-XCGSjf19wD7cZQyZMoyCYHCu',
