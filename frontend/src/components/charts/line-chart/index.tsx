@@ -29,10 +29,18 @@ const LineChart = (props: ILineChartProps) => {
   const { data } = props;
   const options = {
     responsive: true,
+    scales: {
+      x: {
+        // display: false,
+        grid: {
+          display: false,
+        },
+      },
+    },
     plugins: {
       legend: {
-        // position: 'top' as const,
-        display: false,
+        position: 'top' as const,
+        // display: false,
       },
       // title: {
       //   display: true,
@@ -46,7 +54,7 @@ const LineChart = (props: ILineChartProps) => {
     ),
     datasets: [
       {
-        label: 'Цена',
+        label: data[0].name.charAt(0).toUpperCase() + data[0].name.slice(1),
         data: data[0].price_chart_data.map((element: any) => element[1]),
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
