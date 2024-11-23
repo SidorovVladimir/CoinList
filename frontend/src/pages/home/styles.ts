@@ -43,7 +43,7 @@ export const useStyles = makeStyles((theme: Theme) => {
     priceTrend: {
       gap: '5px',
       display: 'flex',
-      width: '20%',
+      width: 80,
       borderRadius: 4,
       padding: '2px',
       alignItems: 'center',
@@ -60,10 +60,28 @@ export const useStyles = makeStyles((theme: Theme) => {
           ? colors.primary.DEFAULT
           : colors.primary[600]
       }`,
+      marginBottom: 32,
       padding: '20px 16ox',
       minHeight: 270,
       border: `1px solid ${colors.borderColor}`,
       borderRadius: 12,
+    },
+    topPriceRoot: {
+      backgroundColor: `${
+        theme.palette.mode === 'light'
+          ? colors.primary.DEFAULT
+          : colors.primary[600]
+      }`,
+      padding: '20px 16ox',
+      marginBottom: 32,
+      minHeight: 270,
+      border: `1px solid ${colors.borderColor}`,
+      borderRadius: 12,
+      '& .MuiPaper-root': {
+        backgroundColor: 'transparent !important',
+        boxShadow: 'none !important',
+        backgroundImage: 'none !important',
+      },
     },
   };
 });
