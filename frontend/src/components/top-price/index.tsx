@@ -54,7 +54,7 @@ const TopPriceComponent = (props: any) => {
                       : `${classes.priceDown}`
                   }
                 >
-                  {asset.price_change_24h}
+                  {asset.price_change_24h.toFixed(2)}
                 </TableCell>
               </TableRow>
             ))}
