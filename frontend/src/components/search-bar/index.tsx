@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Stack, Autocomplete, TextField } from '@mui/material';
 
 import { useAppSelector } from '../../utils/hook';
 import { ISingleAsset } from '../../common/types/assets';
 import { useNavigate } from 'react-router-dom';
 
-const SearchBarComponent = () => {
+const SearchBarComponent: FC = (): JSX.Element => {
   const navigate = useNavigate();
   const assetsArray: ISingleAsset[] = useAppSelector(
     (state) => state.assets.assets
