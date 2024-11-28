@@ -6,9 +6,17 @@ export const useStyles = makeStyles((theme: Theme) => {
   const colors = tokens(theme.palette.mode);
   return {
     root: {
-      padding: '10px 20px',
+      padding: 32,
+      '& a': {
+        textDecoration: 'none',
+        color: `${
+          theme.palette.mode === 'light'
+            ? colors.black.DEFAULT
+            : colors.white.DEFAULT
+        }`,
+      },
     },
-    assetTableBlock: {
+    newsBlock: {
       backgroundColor: `${
         theme.palette.mode === 'light'
           ? colors.primary.DEFAULT
@@ -25,11 +33,8 @@ export const useStyles = makeStyles((theme: Theme) => {
         backgroundImage: 'none !important',
       },
     },
-    watchlistHeading: {
-      textAlign: 'center',
-    },
-    heading: {
-      margin: '25px 0 !important',
-    },
+    newsTitle: { marginBottom: 30 },
+    readMore: { textAlign: 'center', marginTop: 30 },
+    blockTitle: { marginBottom: 32, textAlign: 'center' },
   };
 });
