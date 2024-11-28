@@ -1,13 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ISingleAsset } from '../../common/types/assets';
 import { useAppDispatch, useAppSelector } from '../../utils/hook';
-import { Avatar, Button, Grid2, Typography } from '@mui/material';
+import {
+  Alert,
+  AlertColor,
+  Avatar,
+  Button,
+  Grid2,
+  Snackbar,
+  Typography,
+} from '@mui/material';
 import FlexBetween from '../../components/flex-between';
 import { useStyles } from './styles';
 import { createWatchListRecord } from '../../store/thunks/assets';
 
 const SingleAssetPage: FC = (): JSX.Element => {
+  const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState<AlertColor>('success');
   const navigate = useNavigate();
   const { id } = useParams();
   const classes = useStyles();
@@ -22,12 +32,26 @@ const SingleAssetPage: FC = (): JSX.Element => {
   );
   const dispatch = useAppDispatch();
   const handleCreateRecord = () => {
-    const data = {
-      name: currentAsset?.name ?? '',
-      assetId: currentAsset?.id ?? '',
-    };
-    dispatch(createWatchListRecord(data));
+    try {
+      const data = {
+        name: currentAsset?.name ?? '',
+        assetId: currentAsset?.id ?? '',
+      };
+      dispatch(createWatchListRecord(data));
+      setStatus('success');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      }, 2000);
+    } catch (e) {
+      setStatus('error');
+      setOpen(true);
+      setTimeout(() => {
+        setOpen(false);
+      }, 2000);
+    }
   };
+
   return (
     <>
       {currentAsset && (
@@ -112,6 +136,11 @@ const SingleAssetPage: FC = (): JSX.Element => {
               Добавить в избранное
             </Button>
           </Grid2>
+          <Snackbar open={open} autoHideDuration={6000}>
+            <Alert severity={status} variant='filled' sx={{ width: '100%' }}>
+              Success!
+            </Alert>
+          </Snackbar>
         </Grid2>
       )}
     </>
