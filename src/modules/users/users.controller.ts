@@ -24,7 +24,7 @@ export class UsersController {
     @Req() request,
   ): Promise<UpdateUserDTO> {
     const user = request.user;
-    return this.usersService.updateUser(user.email, updateDto);
+    return this.usersService.updateUser(user.id, updateDto);
   }
 
   @UseGuards(JwtAuthGuard)
