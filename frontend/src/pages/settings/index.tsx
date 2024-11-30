@@ -6,6 +6,8 @@ import { tokens } from '../../theme';
 import SettingsPersonalInfoCpmponent from '../../components/settings-personal-info';
 import { useAppDispatch } from '../../utils/hook';
 import { getPublicUser } from '../../store/thunks/auth';
+import ChangePasswordComponent from '../../components/change-password';
+import RemoveUserComponent from '../../components/remove-user';
 
 const SettingsPage = () => {
   const dispatch = useAppDispatch();
@@ -44,8 +46,12 @@ const SettingsPage = () => {
         <TabPanel value='1'>
           <SettingsPersonalInfoCpmponent />
         </TabPanel>
-        <TabPanel value='2'>Item Two</TabPanel>
-        <TabPanel value='3'>Item Three</TabPanel>
+        <TabPanel value='2'>
+          <ChangePasswordComponent />
+        </TabPanel>
+        <TabPanel value='3'>
+          <RemoveUserComponent />
+        </TabPanel>
       </TabContext>
     </Grid2>
   );
