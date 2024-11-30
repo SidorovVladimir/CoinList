@@ -1,14 +1,46 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../utils/hook';
 import { getNews } from '../../store/thunks/news';
 import { Box, Grid2, Link, Typography } from '@mui/material';
 import { useStyles } from './styles';
 
 const NewsPage: FC = (): JSX.Element => {
+  const [newsItem, setNewsItem] = useState([]);
+  const [offset, setOffset] = useState(10);
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const { news } = useAppSelector((state) => state.news);
-  const renderNewsBlock = news.map((element: any) => (
+
+  useEffect(() => {
+    setNewsItem(news.slice(0, offset));
+  }, [news, offset]);
+
+  useEffect(() => {
+    dispatch(getNews());
+  }, [dispatch]);
+
+  const handleScroll = useCallback(
+    (e: any) => {
+      if (
+        e.target.documentElement.scrollHeight -
+          (e.target.documentElement.scrollTop + window.innerHeight) <
+        100
+      ) {
+        setOffset(offset + 10);
+      }
+    },
+    [offset]
+  );
+
+  useEffect(() => {
+    document.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
+
+  const renderNewsBlock = newsItem.map((element: any) => (
     <Grid2 container className={classes.newsBlock}>
       <Grid2 size={{ xs: 12, md: 3 }}>
         <img src={element.imageurl} alt={element.category} />
@@ -29,9 +61,6 @@ const NewsPage: FC = (): JSX.Element => {
     </Grid2>
   ));
 
-  useEffect(() => {
-    dispatch(getNews());
-  }, [dispatch]);
   return (
     <Grid2 className={classes.root}>
       <Grid2 className={classes.blockTitle}>
