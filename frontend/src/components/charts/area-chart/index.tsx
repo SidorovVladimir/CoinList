@@ -14,6 +14,7 @@ import { Line } from 'react-chartjs-2';
 // import { faker } from '@faker-js/faker';
 import moment from 'moment';
 import { IAreaChartProps } from '../../../common/types/assets';
+import { FC } from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -46,7 +47,9 @@ export const options = {
 
 // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-const AreaChart = (props: IAreaChartProps) => {
+const AreaChart: FC<IAreaChartProps> = (
+  props: IAreaChartProps
+): JSX.Element => {
   const { data } = props;
   const values = {
     labels: data.map((element: number[]): string =>

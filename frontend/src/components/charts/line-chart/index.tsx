@@ -11,6 +11,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import { ILineChartProps } from '../../../common/types/assets';
+import { FC } from 'react';
 // import { faker } from '@faker-js/faker';
 
 ChartJS.register(
@@ -25,7 +26,9 @@ ChartJS.register(
 
 // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-const LineChart = (props: ILineChartProps) => {
+const LineChart: FC<ILineChartProps> = (
+  props: ILineChartProps
+): JSX.Element => {
   const { data } = props;
   const options = {
     responsive: true,

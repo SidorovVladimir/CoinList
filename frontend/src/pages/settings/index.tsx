@@ -1,6 +1,6 @@
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Box, Grid2, Tab, useTheme } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useStyles } from './styles';
 import { tokens } from '../../theme';
 import SettingsPersonalInfoCpmponent from '../../components/settings-personal-info';
@@ -9,7 +9,7 @@ import { getPublicUser } from '../../store/thunks/auth';
 import ChangePasswordComponent from '../../components/change-password';
 import RemoveUserComponent from '../../components/remove-user';
 
-const SettingsPage = () => {
+const SettingsPage: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

@@ -17,6 +17,7 @@ import { createWatchListRecord } from '../../store/thunks/assets';
 
 const SingleAssetPage: FC = (): JSX.Element => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
   const [status, setStatus] = useState<AlertColor>('success');
   const navigate = useNavigate();
   const { id } = useParams();
@@ -38,6 +39,7 @@ const SingleAssetPage: FC = (): JSX.Element => {
         assetId: currentAsset?.id ?? '',
       };
       dispatch(createWatchListRecord(data));
+      setError(false);
       setStatus('success');
       setOpen(true);
       setTimeout(() => {
@@ -45,6 +47,7 @@ const SingleAssetPage: FC = (): JSX.Element => {
       }, 2000);
     } catch (e) {
       setStatus('error');
+      setError(true);
       setOpen(true);
       setTimeout(() => {
         setOpen(false);
@@ -138,7 +141,7 @@ const SingleAssetPage: FC = (): JSX.Element => {
           </Grid2>
           <Snackbar open={open} autoHideDuration={6000}>
             <Alert severity={status} variant='filled' sx={{ width: '100%' }}>
-              Success!
+              {!error ? 'Success!' : 'Ooops'}
             </Alert>
           </Snackbar>
         </Grid2>

@@ -1,11 +1,11 @@
 import { Box, Grid2, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import { useAppDispatch, useAppSelector } from '../../utils/hook';
 import AppLoadingButton from '../loading-button';
-import { updateUserInfo } from '../../store/thunks/auth';
+import { getPublicUser, updateUserInfo } from '../../store/thunks/auth';
 
-const SettingsPersonalInfoCpmponent = () => {
+const SettingsPersonalInfoCpmponent: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const classes = useStyles();
   const [name, setName] = useState('');
@@ -30,6 +30,7 @@ const SettingsPersonalInfoCpmponent = () => {
     };
 
     dispatch(updateUserInfo(data));
+    dispatch(getPublicUser());
   };
   return (
     <Grid2

@@ -6,13 +6,13 @@ import {
   Grid2,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useStyles } from './styles';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../utils/hook';
 import { removeUser } from '../../store/thunks/auth';
 
-const RemoveUserComponent = () => {
+const RemoveUserComponent: FC = (): JSX.Element => {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
 
