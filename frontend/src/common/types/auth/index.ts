@@ -17,30 +17,32 @@ export interface IPropsRegister<
 }
 
 export interface IAuthState {
-  // user: IPublicUser;
-  user: any;
+  user: {
+    user: IPublicUser;
+    token: string;
+  };
   isLogged: boolean;
   isLoading: boolean;
 }
 
-// interface IPublicUser {
-//   id: number | null;
-//   firstName: string;
-//   username: string;
-//   email: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   watchlist: [IWatchlist];
-// }
+export interface IPublicUser {
+  id: number | null;
+  firstName: string;
+  username: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+  watchlist: [IWatchlist];
+}
 
-// interface IWatchlist {
-//   id: number | null;
-//   name: string;
-//   assetId: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   user: number | null;
-// }
+interface IWatchlist {
+  id: number | null;
+  name: string;
+  assetId: string;
+  createdAt: string;
+  updatedAt: string;
+  user: number | null;
+}
 
 export interface ILoginData {
   email: string;
