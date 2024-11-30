@@ -8,7 +8,6 @@ const NewsPage: FC = (): JSX.Element => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const { news } = useAppSelector((state) => state.news);
-
   const renderNewsBlock = news.map((element: any) => (
     <Grid2 container className={classes.newsBlock}>
       <Grid2 size={{ xs: 12, md: 3 }}>
