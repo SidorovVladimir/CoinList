@@ -1,20 +1,32 @@
 version: '3.9'
 
 services:
+  main:
+    container_name: main
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 5000:5000
+    command: npm run start:dev
+    depends_on:
+      - postgresql
+    restart: always
   postgresql:
     image: postgres
     container_name: db-postgres
     ports:
-      - "5432:5432"
+      - '5432:5432'
+    env_file:
+      - .env
     environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-    command: postgres
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     restart: always
-
-
-  redis:
-    image: redis:alpine3.20
-    container_name: db-redis
-    ports:
-      - "6379:6379"
+volumes:
+  pgdata:
