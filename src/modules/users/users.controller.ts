@@ -43,6 +43,6 @@ export class UsersController {
   @Delete()
   deleteUser(@Req() request): Promise<boolean> {
     const user = request.user;
-    return this.usersService.deleteUser(user.email);
+    return this.usersService.deleteUser(user.id);
   }
 }
